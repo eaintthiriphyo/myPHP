@@ -2,7 +2,7 @@
 $servername="localhost";
 $username="root";
 $password="";
-$dbname="registration";
+$dbname="diary";
 
 $conn=mysqli_connect($servername,$username,$password,$dbname);
 if($conn->connect_error){
