@@ -1,6 +1,8 @@
 <?php
 include 'db.php';
-
+session_start();
+$u_id=$_SESSION['u_id'];
+$u_name=$_SESSION['username'];
 $id=$_GET['id'];
 $sql="select * from diary where id=$id";
 
@@ -23,11 +25,11 @@ $date  = $_POST['diary_date'] ?? '';
     throw new Exception("Invalid date format exception YYYY-MM-DD.");
  }
 
- $stmt=$conn->prepare("Update diary SET diary_date=?,content=? WHERE id=?");
- $stmt->bind_param('ssi',$date,$content,$id);
+ $stmt=$conn->prepare("Update diary SET diary_date=?,content=?,user_id=? WHERE id=?");
+ $stmt->bind_param('ssii',$date,$content,$u_id,$id);
  $stmt->execute();
  $stmt->close();
- header("Location:index.php");
+ header("Location:home.php");
  exit;
 }
 
@@ -45,7 +47,7 @@ $date  = $_POST['diary_date'] ?? '';
 <body>
     <br><br>
 
-    <h3>Edit Diary Entry</h3>
+    <h3>Edit Diary Entry : <?=$u_name ?></h3>
     <form method="post" >
 
     Date :<br>

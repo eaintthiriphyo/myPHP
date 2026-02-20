@@ -1,5 +1,8 @@
 <?php
 include "db.php";
+session_start();
+$u_id=$_SESSION['u_id'];
+$u_name=$_SESSION['username'];
 
 ?>
 <!DOCTYPE html>
@@ -11,11 +14,16 @@ include "db.php";
 </head>
 <body>
     <br>
-    <a href="add.php">Add New Diary</a>
+    <h3>Welcome : <?= $u_name ?></h3>
+    <a href="logout.php"><button >Logout</button></a>
+    <br><br>
+    <a href="add.php">Add New Diary : </a>
     <br><br>
 
     <?php
-    $sql="select * from diary order by diary_date desc";
+
+
+    $sql="select * from diary where user_id='$u_id' order by diary_date desc";
     $result=mysqli_query($conn,$sql);
     while($row=mysqli_fetch_assoc($result)){
 

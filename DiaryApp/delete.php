@@ -6,5 +6,5 @@ include 'db.php';
 $id=$_GET['id'];
 $sql="delete from diary where id=$id";
 mysqli_query($conn,$sql);
-header("location:index.php");
+header("location:home.php");
 ?>

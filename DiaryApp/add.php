@@ -1,14 +1,17 @@
 <?php
 include 'db.php';
+session_start();
+$u_id=$_SESSION['u_id'];
+$u_name=$_SESSION['username'];
 
 if(isset($_POST['save'])){
     $date=$_POST['diary_date'];
     $content=$_POST['content'];
 
-    $sql="insert into diary (diary_date,content) values ('$date','$content')";
+    $sql="insert into diary (diary_date,content,user_id) values ('$date','$content','$u_id')";
 
     mysqli_query($conn ,$sql);
-    header("location:index.php");
+    header("location:home.php");
 }
 ?>
 <!DOCTYPE html>
@@ -20,8 +23,9 @@ if(isset($_POST['save'])){
 </head>
 <body>
     <br><br>
+    
     <form method="post" >
-
+        <h3>User : <?=  $u_name?></h3>
     Date :<br>
      <input type="date" name="diary_date" require>
      <br><br>
